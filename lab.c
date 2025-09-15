@@ -1,0 +1,27 @@
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+int main() {
+
+  char *line = NULL;
+  size_t length = 0;
+  ssize_t nread;
+  char *token;
+  char *delim = " ";
+  char *saveptr;
+  printf("Enter a string of your choice"
+         "\n");
+
+  nread = getline(&line, &length, stdin);
+
+  token = strtok_r(line, delim, &saveptr);
+
+  while (token != NULL) {
+    printf("%s\n", token);
+    token = strtok_r(NULL, delim, &saveptr);
+  }
+
+  return 0;
+}
