@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  char *string = NULL;
+  size_t len = 0;
+  size_t nread;
+  char arr[200];
+  nread = getline(&string, &len, stdin);
+
+  while (string != "print") {
+    printf("Enter input: ");
+
+    printf("%s", string);
+  }
+
+  return 0;
+}

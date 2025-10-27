@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+
+int main() {
+  char *line = NULL;
+  size_t len;
+  ssize_t nread;
+  while(strcmp(line,"print") != 0){
+  nread = getline(&line, &len, stdin);
+  fwrite(line, sizeof(char), nread, stdout);
+  }
+  return 0;
+}

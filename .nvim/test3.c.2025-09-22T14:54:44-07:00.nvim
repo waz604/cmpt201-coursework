@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+int main() {
+
+  printf("hello world \n");
+
+  pid_t pid = fork();
+
+  if (pid == 0) {
+    printf("CHILD: \n ");
+
+    printf("%d\n", getpid());
+    execl("/bin/ls", "/bin/ls", "-a", "-l", (char *)NULL);
+  } else {
+    int waitstatus;
+   if( waitpid(0, &waitstatus, 0)){
+       printf("%d" , waitstatus );
+
+   }
+    
+  }
+
+
+}

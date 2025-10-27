@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+
+  printf("hello world \n");
+
+  pid_t pid = fork();
+
+  if (pid == 0) {
+    printf("CHILD: \n ");
+    execl("/bin/ls", "/bin/ls", "-a", "-l", "-h", (char *)NULL);
+  }else{
+    printf("PARENT: \n");
+    execl("/bin/ls" , "/bin/ls", "-a" ,(char *)NULL);
+  }
+}

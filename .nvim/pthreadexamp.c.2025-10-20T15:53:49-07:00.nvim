@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+void* threadfunc(void *arg){
+printf("hi \n");
+return NULL;
+}
+
+int main(void){
+pthread_t p;
+pthread_create(&p,NULL,threadfunc,NULL);
+pthread_join(p,NULL);
+}

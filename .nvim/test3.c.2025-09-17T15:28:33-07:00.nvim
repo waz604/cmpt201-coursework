@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+
+  printf("hello world \n");
+
+  pid_t pid = fork();
+
+  if (pid == 0) {
+    printf("CHILD: \n ");
+
+  printf("%d\n", getpid());
+    execl("/bin/ls", "/bin/ls", "-a", "-l", "-h", (char *)NULL);
+  } else {
+    sleep(1);
+    printf("PARENT: \n");
+   printf("%d\n" , getpid());
+ execl("/bin/ls", "/bin/ls", "-a", (char *)NULL);
+  }
+
+}

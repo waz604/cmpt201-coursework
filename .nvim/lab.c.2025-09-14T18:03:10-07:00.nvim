@@ -1,0 +1,17 @@
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+
+int main(void) {
+  FILE *stream;
+  char *line = NULL;
+  ssize_t nread;
+  size_t length = 0;
+
+  printf("Enter a string of your choice");
+
+  nread = getline(&line, &length, stdin);
+
+  printf("%s", line);
+}

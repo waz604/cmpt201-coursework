@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+int main() {
+  char *line = NULL;
+  size_t len;
+  ssize_t nread;
+  int maxw = 5;
+  int maxl = 10;
+  char words[maxw][maxl];
+  int index = 0;
+  int count = 0;
+
+  while (1) {
+    nread = getline(&line, &len, stdin);
+
+    if (strcmp(line, "print\n") == 0) {
+      for (int i = 0; i < 5; i++) {
+        size_t length = strlen(words[i]);
+        fwrite(words[i], sizeof(char), length, stdout);
+        printf("\n");
+      }
+
+      break;
+    }
+
+    strncpy(words[index], line, maxl - 1);
+    index++;
+    if (index == 4) {
+      index = 0;
+    }
+  }
+  return 0;
+}

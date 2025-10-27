@@ -1,0 +1,48 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+int main() {
+  void *start = sbrk(256);
+
+  char *block1 = (char *)start;
+  char *block2 = (char *)start + 128;
+
+  struct header *h1 = (struct header *)block1;
+  struct header *h2 = (struct header *)block2;
+
+  h1->size = 128;
+  h2->size = 128;
+  h1->next = NULL;
+  h2->next = h1;
+
+  char *data1 = (char *)(h1 + 1);
+  char *data2 = (char *)(h2 + 1);
+
+  size_t data_size = 128 - sizeof(struct header);
+
+  memset(data1, 0, data_size);
+  memset(data2, 1, data_size);
+
+  printf("first block:    %p\n", (void *)block1);
+  printf("second block:    %p\n", (void *)block2);
+  printf("first block size %lu\n", h1->size);
+  printf("first block next:    %p\n", (void *)h1->next);
+  printf("second block size %lu\n", h2->size);
+  printf("second block next:    %p\n", (void *)h2->next);
+
+  for (int i = 0; i <data_size; i++){
+    printf("%d\n", data1[i]);
+  }
+
+ for (int i = 0; i <data_size; i++){
+    printf("%d\n", data2[i]);
+  }
+
+
+}

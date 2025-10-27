@@ -1,0 +1,13 @@
+#include <unistd.h>
+#include <stdio.h>
+
+int main (){
+  
+  printf("hello world \n");
+
+  pid_t pid=fork();
+
+  if(pid==0){
+    execl("/bin/ls", "/bin/ls", "-a", "-l", "-h", (char*) NULL);
+  }
+}
